@@ -8,6 +8,7 @@ import Calender from "../../assests/images/calender.png";
 import "./styless.css";
 import CustomButton from "../../component/customButton/CustomButton";
 import { BiSearchAlt } from "react-icons/bi";
+import { NavLink } from "react-router-dom";
 
 const SearchSection = () => {
   const { root, Margin,inputField, icon, picker, buttonStyle } = SearchStyles();
@@ -67,6 +68,7 @@ const SearchSection = () => {
       <Grid xs={12} md={3} className={Margin}>
         <CustomButton
           buttonText="Search Buses"
+          component={NavLink}
           to="/listing-pages"
           className={buttonStyle}
           startIcon={<BiSearchAlt />}

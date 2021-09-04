@@ -1,9 +1,10 @@
 import React from 'react'
 import { Button } from "@material-ui/core";
 import { NavLink } from 'react-router-dom';
-const CustomButton = ({startIcon,to,buttonText,className}) => {
+const CustomButton = ({id,startIcon,to,buttonText,onMouseOver,onMouseOut,className,component,onClick,style}) => {
     return (
-        <Button component={NavLink} to={to} className={className} variant="contained" color="inherit"  startIcon={startIcon}>
+        <Button id={id} onMouseOver={onMouseOver} 
+        onMouseOut={onMouseOut}  component={component} to={to} className={className} style={style} onClick={onClick} variant="contained" color="inherit"  startIcon={startIcon}>
       {buttonText}
       </Button>
     )

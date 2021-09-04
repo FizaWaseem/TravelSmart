@@ -7,7 +7,7 @@ const theme = createMuiTheme({
         fontSize: 18,
         fontWeight: 500,
         fontFamiy: "Work Sans', sans-serif",
-        borderRadius:"5px",
+        borderRadius: "5px",
         textTransform: "capitalize",
         "&:hover": {
           backgroundColor: "#fff",
@@ -15,9 +15,48 @@ const theme = createMuiTheme({
         },
       },
     },
-  //   MuiAppBar: {
-  //  positionFixed: {
-  //     position:" inherit"},  },
+    MuiRadio: {
+      root: {
+        color: 'grey',
+      },
+      colorSecondary: {
+        '&$checked': {
+          color: '#ff7f47',
+        },
+      },
+    },
+    MuiSlider: {
+      root: {
+        color: "#ff7f47",
+        marginLeft:".2rem",
+        width:"97%"
+      },
+      mark: {
+        width: "0%",
+        height:"0%",
+        left: "0%"
+    },
+      rail: {
+        width: "100%",
+        height: "7px",
+        borderRadius: 4,
+      },
+      track: {
+        height: "7px",
+        borderRadius: 4,
+      },
+      thumb: {
+        width: "17px",
+        height: "17px",
+        '&:focus, &:hover, &$active': {
+          boxShadow: '0 3px 1px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.3),0 0 0 1px rgba(0,0,0,0.02)',
+        },
+       },
+    },
+
+    //   MuiAppBar: {
+    //  positionFixed: {
+    //     position:" inherit"},  },
     MuiIconButton: {
       root: {
         color: "#ff7f47",
@@ -25,26 +64,22 @@ const theme = createMuiTheme({
     },
     MuiTextField: {
       root: {
-        // margin: "10px 0",
       },
-      
     },
-    MuiInputBase:{
+    MuiInputBase: {
       root: {
-      color:" rgba(0, 0, 0, 0.87)",
-       fontFamily:"Work Sans', sans-serif",
-    
+        color: " rgba(0, 0, 0, 0.87)",
+        fontFamily: "Work Sans', sans-serif",
+      },
+    },
+    MuiOutlinedInput: {
+      inputMarginDense: {
+        padding: "0 14px",
+        paddingTop: "15.5px",
+        paddingBottom: "15.5px",
+      },
+    },
   },
-
-},
-MuiOutlinedInput:{
-  inputMarginDense :{
-  padding: "0 14px",
-   paddingTop: "15.5px",
-   paddingBottom: "15.5px",
-}}
-  },
- 
 
   typography: {
     fontFamiy: "Work Sans', sans-serif",
