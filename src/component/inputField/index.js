@@ -18,6 +18,7 @@ const InputField = ({
   inputClass,
   error = null,
   onChange,
+  startAdornment
 }) => {
   const { root, input } = LayoutStyle();
   return (
@@ -40,7 +41,9 @@ const InputField = ({
       {...(error && { error: true, helperText: error })}
       InputProps={{
         classes: { input: input },
+        startAdornment:startAdornment,
       }}
+      
     />
   );
 };

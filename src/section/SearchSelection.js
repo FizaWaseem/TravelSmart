@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import { Grid } from "@material-ui/core";
-import InputField from "../../component/inputField";
+import InputField from "../component/inputField";
 import SearchStyles from "./styles";
 import "react-datepicker/dist/react-datepicker.css";
-import Calender from "../../assests/images/calender.png";
+import Calender from "../assests/images/calender.png";
 import "./styless.css";
-import CustomButton from "../../component/customButton/CustomButton";
+import CustomButton from "../component/customButton/CustomButton";
 import { BiSearchAlt } from "react-icons/bi";
 import { NavLink } from "react-router-dom";
 

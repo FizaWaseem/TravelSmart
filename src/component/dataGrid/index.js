@@ -1,9 +1,9 @@
 import * as React from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import CustomButton from "../customButton/CustomButton";
-import { Grid, Typography, Card } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import { FaBusAlt } from "react-icons/fa";
-import { Box, withStyles } from "@material-ui/core";
+import { withStyles } from "@material-ui/core";
 
 const StyledDataGrid = withStyles({
   root: {

@@ -2,7 +2,7 @@ import React from "react";
 import { Grid ,Typography } from "@material-ui/core";
 import Back from "../../assests/images/back.jpg";
 import HomeStyles from "./styles";
-import SearchSection from "../../section/SearchBox";
+import SearchSection from "../../section/SearchSelection";
 const Home = () => {
   const { root, searchDiv, searchContent } = HomeStyles();
   return (

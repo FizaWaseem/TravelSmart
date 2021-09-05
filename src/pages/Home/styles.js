@@ -14,7 +14,7 @@ const HomeStyles = makeStyles((theme) => ({
   searchDiv: {
   position: "absolute",
   width: "100%",
-  top:"84%"
+  top:"76%"
 },
   searchContent:{
     backgroundColor: "rgba(48,79,71,.9);",
