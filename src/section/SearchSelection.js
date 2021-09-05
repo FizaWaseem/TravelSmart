@@ -9,44 +9,58 @@ import "./styless.css";
 import CustomButton from "../component/customButton/CustomButton";
 import { BiSearchAlt } from "react-icons/bi";
 import { NavLink } from "react-router-dom";
-
+import CustomSelect from "../component/select";
+import { Country, State, City } from "country-state-city";
+import csc from "country-state-city";
+import useForm from "./useForm";
+import CitySelect from "../component/select/AsyncSelect";
 const SearchSection = () => {
-  const { root, Margin,inputField, icon, picker, buttonStyle } = SearchStyles();
-  const [date, setDate] = useState(new Date());
+  const { root, Margin, selectMargin,inputField, icon, picker, buttonStyle } =
+    SearchStyles();
+
   const [date1, setDates] = useState("");
 
-  const handleCalendarClose = () => {
-    setDate(date);
-    console.log("Calxxx", date);
-  };
-  const handleCalendarOpen = () => console.log("Calendar opened");
+  // const handleCalendarClose = () => {
+  //   setDate(date);
+  //   console.log("Calxxx", date);
+  // };
+  // const handleCalendarOpen = () => console.log("Calendar opened");
 
+  const {
+    colourStyles,
+    handleSubmit,
+    setSourceCity,
+    setDestinationCity,
+    doj,
+    setdate,
+  } = useForm();
   return (
     <Grid xs={12} className={root}>
-      <Grid xs={12} md={3} className={Margin}>
-        <InputField
-          name="Departure City"
+      <Grid xs={12} md={3} className={selectMargin}>
+        <CitySelect
           placeholder="Departure City"
-          inputClass={inputField}
+          styles={colourStyles}
+          onChange={(data) => setSourceCity(data.value)}
         />
       </Grid>
-
-      <Grid xs={12} md={3} className={Margin}>
-        <InputField
-          name="Arrival City"
+      <Grid xs={12} md={3} className={selectMargin}>
+        <CitySelect
+          name="destinationCity"
           placeholder="Arrival City"
-          inputClass={inputField}
+          styles={colourStyles}
+          onChange={(data) => setDestinationCity(data.value)}
         />
       </Grid>
       <Grid xs={12} md={3} className={Margin}>
         <div className={picker}>
           <DatePicker
             className="pickers"
+            name="doj"
             style={{ border: "none", width: "30%" }}
-            selected={date}
-            onChange={(date) => setDate(date)}
-            onCalendarClose={handleCalendarClose}
-            onCalendarOpen={handleCalendarOpen}
+            selected={doj}
+            onChange={(date) => setdate(date)}
+            // onCalendarClose={handleCalendarClose}
+            // onCalendarOpen={handleCalendarOpen}
           />
           <img src={Calender} className={icon} alt="cal" />
         </div>
@@ -59,8 +73,8 @@ const SearchSection = () => {
             placeholderText="Return (Optional)"
             selected={date1}
             onChange={(date) => setDates(date)}
-            onCalendarClose={handleCalendarClose}
-            onCalendarOpen={handleCalendarOpen}
+            // onCalendarClose={handleCalendarClose}
+            // onCalendarOpen={handleCalendarOpen}
           />
           <img src={Calender} className={icon} alt="cal" />
         </div>
@@ -68,8 +82,9 @@ const SearchSection = () => {
       <Grid xs={12} md={3} className={Margin}>
         <CustomButton
           buttonText="Search Buses"
-          component={NavLink}
-          to="/listing-pages"
+          // component={NavLink}
+          // to="/listing-pages"
+          onClick={handleSubmit}
           className={buttonStyle}
           startIcon={<BiSearchAlt />}
         />

@@ -8,6 +8,14 @@ const SearchStyles = makeStyles((theme) => ({
     },
   },
   Margin:{ 
+    minWidth:"177px",
+    marginLeft: "1rem" ,
+    [theme.breakpoints.down("xs")]: {
+      margin: ".5rem 0rem" ,
+    },
+  },
+  selectMargin:{ 
+    minWidth:"217px",
     marginLeft: "1rem" ,
     [theme.breakpoints.down("xs")]: {
       margin: ".5rem 0rem" ,

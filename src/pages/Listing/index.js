@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Grid, Typography, Card } from "@material-ui/core";
-import Slider from "@material-ui/core/Slider";
 import ListingStyles from "./styles";
 import { GoCalendar } from "react-icons/go";
 import { CgArrowLongRight } from "react-icons/cg";

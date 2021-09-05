@@ -1,10 +1,14 @@
-import React from "react";
+import React,{useEffect} from "react";
 import { Grid ,Typography } from "@material-ui/core";
 import Back from "../../assests/images/back.jpg";
 import HomeStyles from "./styles";
 import SearchSection from "../../section/SearchSelection";
+
+
 const Home = () => {
   const { root, searchDiv, searchContent } = HomeStyles();
+
+ 
   return (
     <Grid>
       <Grid className={root}>
