@@ -8,12 +8,11 @@ import { BiCalendarCheck } from "react-icons/bi";
 import CustomButton from "../../component/customButton/CustomButton";
 import SearchSection from "../../section/SearchSelection";
 import PriceSlider from "../../component/priceSlider";
-import SortingGrid from "../../component/dataGrid";
 import RadioButtons from "../../component/RadioGroup";
 import CustomSelect from "../../component/select";
 import BusTable from "../../component/Table";
 import Collapse from "@material-ui/core/Collapse";
-import { TramRounded } from "@material-ui/icons";
+
 const ListingPage = () => {
   const {
     root,

@@ -23,8 +23,8 @@ const InputField = ({
   const { root, input } = LayoutStyle();
   return (
     <TextField
-    id={id}
-    formate={formate}
+      id={id}
+      formate={formate}
       className={[root,inputClass]}
       placeholder={placeholder}
       name={name}

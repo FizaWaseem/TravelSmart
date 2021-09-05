@@ -85,6 +85,30 @@ const theme = createMuiTheme({
         color: " rgba(0, 0, 0, 0.87)",
         fontFamily: "Work Sans', sans-serif",
       },
+      input:{
+        "&:focus,&:hover":{
+          backgroundColor:"white",
+        }
+      }
+    },
+    MuiFilledInput: {
+      root:{
+        backgroundColor:"white",
+        border: "1px solid rgba(0, 0, 0, 0.12)",
+        borderRadius:"5px",
+      },
+      underline:{
+        "&:before, &:after,&:hover,&active": {
+         borderBottom:"none"
+        },
+       
+      },
+      
+      inputMarginDense: {
+        padding: "0 14px",
+        paddingTop: "8.5px",
+        paddingBottom: "8.5px",
+      },
     },
     MuiOutlinedInput: {
       inputMarginDense: {

@@ -10,22 +10,23 @@ import {
   RadioGroup,
   Radio,
   FormControlLabel,
-  Divider,
+  Divider,Typography,Grid
 } from "@material-ui/core";
 import InfoBox from "../../section/infoBox"
 import Zoom from "@material-ui/core/Zoom";
-import { Grid } from "@material-ui/core";
+
 import { FaBusAlt } from "react-icons/fa";
 import useTable from "./useTable";
 import { Search } from "@material-ui/icons";
 import CustomButton from "../customButton/CustomButton";
 import { withStyles } from "@material-ui/core/styles";
 
-import Typography from "@material-ui/core/Typography";
 import DialogBox from "../popup/DialogBox";
 import ListingStyles from "../../pages/Listing/styles";
 import RadioButtons from "../RadioGroup";
 import InputField from "../inputField";
+import tableStyles from "./style";
+import DropBox from "../../section/dropBox";
 const useStyles = makeStyles((theme) => ({
   pageContent: {
     margin: theme.spacing(5),
@@ -58,16 +59,28 @@ const rows = [
     acBus: 5555,
     charge: 5555,
   },
+  {
+    id: 2,
+    firsName: "Damien",
+    gender: "female",
+    surName: 33,
+    age: 5,
+    seatNo: 5555,
+    fare: 5555,
+    acBus: 5555,
+    charge: 5555,
+  },
 ];
 export default function BookingSeat() {
   const [records, setRecords] = useState(rows);
 const{buttonStyle}=ListingStyles();
   const { TblContainer, TblHead } = useTable(records, headCells);
-
+const {root,infoDiv,btnDiv}=tableStyles();
   return (
     <>
      <form>
-    <Grid style={{borderRadius:"5px", border:"1px solid rgba(0, 0, 0, 0.12)",marginTop:".1rem",padding:".5rem 2rem"}}>
+    <Grid className={root}>
+       <DropBox/>
       <TblContainer >
         <TblHead />
         <TableBody>
@@ -94,14 +107,14 @@ const{buttonStyle}=ListingStyles();
                 </RadioGroup>
               </TableCell>
               <TableCell>
-                <InputField placeholder="First Name" />
+                <InputField  variant="filled" placeholder="First Name" />
               </TableCell>
               <TableCell>
-                <InputField name="Sur Name" placeholder="Sur Name" />
+                <InputField variant="filled" name="Sur Name" placeholder="Sur Name" />
               </TableCell>
               <TableCell>
                 {" "}
-                <InputField placeholder="Age" />
+                <InputField  variant="filled" placeholder="Age" />
               </TableCell>
               <TableCell>{item.seatNo}</TableCell>
               <TableCell>₹{item.charge}</TableCell>
@@ -123,11 +136,14 @@ const{buttonStyle}=ListingStyles();
         </Typography>
       </Grid>
       </Grid>
-    <Grid style={{borderRadius:"5px", border:"1px solid rgba(0, 0, 0, 0.12)",marginTop:".9rem",padding:"2rem"}}>
+    <Grid  className={infoDiv} >
      <InfoBox/>
      </Grid>
-     <div style={{display:"flex",justifyContent: "end",padding:"1rem"}}>
-       <CustomButton buttonText="PROCEED TO PAYMENT" className={buttonStyle}/>
+     <div className={btnDiv} >
+       <CustomButton 
+       buttonText="PROCEED TO PAYMENT"
+        className={buttonStyle}
+        />
      </div>
     </form>
     </>

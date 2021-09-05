@@ -14,6 +14,7 @@ const InfoBox = () => {
     <Grid xs={12} className={root}>
       <Grid xs={12} md={4} className={Margin}>
         <InputField
+        required={true}
           name="Mobile"
           placeholder="Mobile"
           inputClass={inputField}
