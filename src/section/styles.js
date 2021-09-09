@@ -3,19 +3,19 @@ const SearchStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     justifyContent: "space-around",
+    width:"100%",
     [theme.breakpoints.down("xs")]: {
       flexDirection:"column"
     },
   },
-  Margin:{ 
-    minWidth:"177px",
+  Margin:{
     marginLeft: "1rem" ,
     [theme.breakpoints.down("xs")]: {
       margin: ".5rem 0rem" ,
     },
   },
   selectMargin:{ 
-    minWidth:"217px",
+    width: "100%",
     marginLeft: "1rem" ,
     [theme.breakpoints.down("xs")]: {
       margin: ".5rem 0rem" ,

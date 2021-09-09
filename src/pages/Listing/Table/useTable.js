@@ -28,6 +28,7 @@ export default function useTable(records, headCells,filterFn) {
     const [rowsPerPage, setRowsPerPage] = useState(pages[page])
     const [order, setOrder] = useState()
     const [orderBy, setOrderBy] = useState()
+    const [detailShow, setShowDetail] = useState([]);
 
     const TblContainer = props => (
         <Table className={classes.table}>
@@ -62,7 +63,23 @@ export default function useTable(records, headCells,filterFn) {
             </TableRow>
         </TableHead>)
     }
-
+  
+    const handleExpand = (id) => {
+      // slice method to return new element on new object
+      const showState = detailShow.slice();
+      // index of search array of slected item
+      const index = showState.indexOf(id);
+      // if Item found retrive item
+      if (index >= 0) {
+        // remove item if it exist in array
+        showState.splice(index, 1);
+        setShowDetail(showState);
+      } else {
+        showState.push(id);
+        setShowDetail(showState);
+         setChecked(true)
+      }
+    };
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
     }
@@ -119,6 +136,8 @@ export default function useTable(records, headCells,filterFn) {
         setChecked,
         checked,
         TblPagination,
-        recordsAfterPagingAndSorting
+        recordsAfterPagingAndSorting,
+        handleExpand,
+        detailShow
     }
 }

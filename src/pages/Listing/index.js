@@ -9,7 +9,7 @@ import SearchSection from "../../section/SearchSelection";
 import PriceSlider from "../../component/priceSlider";
 import RadioButtons from "../../component/RadioGroup";
 import CustomSelect from "../../component/select";
-import BusTable from "../../component/Table";
+import BusTable from "./Table/index";
 import Collapse from "@material-ui/core/Collapse";
 
 const ListingPage = () => {

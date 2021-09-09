@@ -1,31 +1,19 @@
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import { Grid } from "@material-ui/core";
-import InputField from "../component/inputField";
 import SearchStyles from "./styles";
 import "react-datepicker/dist/react-datepicker.css";
 import Calender from "../assests/images/calender.png";
 import "./styless.css";
 import CustomButton from "../component/customButton/CustomButton";
 import { BiSearchAlt } from "react-icons/bi";
-import { NavLink } from "react-router-dom";
-import CustomSelect from "../component/select";
-import { Country, State, City } from "country-state-city";
-import csc from "country-state-city";
 import useForm from "./useForm";
 import CitySelect from "../component/select/AsyncSelect";
 const SearchSection = () => {
-  const { root, Margin, selectMargin,inputField, icon, picker, buttonStyle } =
+  const { root, Margin, selectMargin, icon, picker, buttonStyle } =
     SearchStyles();
 
   const [date1, setDates] = useState("");
-
-  // const handleCalendarClose = () => {
-  //   setDate(date);
-  //   console.log("Calxxx", date);
-  // };
-  // const handleCalendarOpen = () => console.log("Calendar opened");
-
   const {
     colourStyles,
     handleSubmit,
@@ -33,6 +21,7 @@ const SearchSection = () => {
     setDestinationCity,
     doj,
     setdate,
+    loader,
   } = useForm();
   return (
     <Grid xs={12} className={root}>
@@ -59,6 +48,7 @@ const SearchSection = () => {
             style={{ border: "none", width: "30%" }}
             selected={doj}
             onChange={(date) => setdate(date)}
+            formate="dd/mm/yy"
             // onCalendarClose={handleCalendarClose}
             // onCalendarOpen={handleCalendarOpen}
           />
@@ -73,6 +63,7 @@ const SearchSection = () => {
             placeholderText="Return (Optional)"
             selected={date1}
             onChange={(date) => setDates(date)}
+
             // onCalendarClose={handleCalendarClose}
             // onCalendarOpen={handleCalendarOpen}
           />
@@ -81,12 +72,12 @@ const SearchSection = () => {
       </Grid>
       <Grid xs={12} md={3} className={Margin}>
         <CustomButton
-          buttonText="Search Buses"
+          buttonText={loader ? "Loading..." : "Search Buses"}
           // component={NavLink}
           // to="/listing-pages"
           onClick={handleSubmit}
           className={buttonStyle}
-          startIcon={<BiSearchAlt />}
+          startIcon={loader ? null : <BiSearchAlt />}
         />
       </Grid>
     </Grid>

@@ -16,7 +16,7 @@ const InputField = ({
   defaultValue,
   rowsMax,
   inputClass,
-  error = null,
+  error=true,
   onChange,
   startAdornment
 }) => {

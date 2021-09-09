@@ -1,42 +1,23 @@
-import React, { useState, useRef } from "react";
+import React, { useState} from "react";
 import {
-  Paper,
-  makeStyles,
   TableBody,
   TableRow,
   TableCell,
-  Tooltip,
-  Card,
   RadioGroup,
   Radio,
   FormControlLabel,
-  Divider,Typography,Grid
+  Divider,Typography,Grid, Button
 } from "@material-ui/core";
-import InfoBox from "../../section/infoBox"
-import Zoom from "@material-ui/core/Zoom";
-
-import { FaBusAlt } from "react-icons/fa";
+import InfoBox from "../infoBox"
+import  useForm from "../useForm"
 import useTable from "./useTable";
-import { Search } from "@material-ui/icons";
-import CustomButton from "../customButton/CustomButton";
-import { withStyles } from "@material-ui/core/styles";
-
-import DialogBox from "../popup/DialogBox";
+import CustomButton from "../../component/customButton/CustomButton";
 import ListingStyles from "../../pages/Listing/styles";
-import RadioButtons from "../RadioGroup";
-import InputField from "../inputField";
+import InputField from "../../component/inputField";
 import tableStyles from "./style";
-import DropBox from "../../section/dropBox";
-const useStyles = makeStyles((theme) => ({
-  pageContent: {
-    margin: theme.spacing(5),
-    padding: theme.spacing(3),
-  },
-  searchInput: {
-    width: "75%",
-  },
-}));
-
+import DropBox from "../dropBox";
+import { fieldName } from "../../utils/constants";
+import {useSelector} from "react-redux";
 const headCells = [
   { id: "gender", label: "Gender" },
   { id: "firsName", label: "Name" },
@@ -47,6 +28,7 @@ const headCells = [
   { id: "charge", label: "Op Service Charge" },
   { id: "AC Bus", label: "AC Bus" },
 ];
+
 const rows = [
   {
     id: 1,
@@ -72,26 +54,39 @@ const rows = [
   },
 ];
 export default function BookingSeat() {
-  const [records, setRecords] = useState(rows);
+  const SelectedSeat = useSelector((state) => state.seat.SelectedSeat);
+  const sumCount= useSelector((state) => state.seat.sumCount);
+  const [records,] = useState(rows);
 const{buttonStyle}=ListingStyles();
   const { TblContainer, TblHead } = useTable(records, headCells);
 const {root,infoDiv,btnDiv}=tableStyles();
+const {handleChange,formData,errors,setBoarding,setDrooping,handleFormSubmit,setIdProof,loader,handleBtn}=useForm();
+
   return (
     <>
-     <form>
+    
     <Grid className={root}>
-       <DropBox/>
+    <DropBox
+        value={formData.email}
+        errors={errors.email}
+        InputOnChange={handleChange}
+         BoardingOnChange={(data) => setBoarding(data.value)}
+          DropingOnChange={(data) => setDrooping(data.value)}/>
+
       <TblContainer >
         <TblHead />
         <TableBody>
-          {rows.map((item) => (
+          {SelectedSeat.length>0 &&
+         SelectedSeat.map((item) => (
             <TableRow key={item.id}>
               <TableCell>
                 <RadioGroup
+                onChange={handleChange} 
+                value={formData.selected}
                   row
                   aria-label="position"
                   defaultValue={item.gender}
-                  name="radio-buttons-group"
+                  name={fieldName.radio}
                 >
                   <FormControlLabel
                     value="male"
@@ -107,14 +102,30 @@ const {root,infoDiv,btnDiv}=tableStyles();
                 </RadioGroup>
               </TableCell>
               <TableCell>
-                <InputField  variant="filled" placeholder="First Name" />
+                <InputField 
+                 variant="filled"
+                  name={fieldName.firstName} 
+                  placeholder="First Name" 
+                  onChange={handleChange} 
+                value={formData.firstName}  />
               </TableCell>
               <TableCell>
-                <InputField variant="filled" name="Sur Name" placeholder="Sur Name" />
+                <InputField 
+                 variant="filled" 
+                 name={fieldName.surName}
+                 placeholder="Sur Name" 
+                 onChange={handleChange} 
+                 value={formData.surName}
+                 />
               </TableCell>
               <TableCell>
                 {" "}
-                <InputField  variant="filled" placeholder="Age" />
+                <InputField  
+                variant="filled" 
+                name={fieldName.age}
+                 placeholder="Age" 
+                 onChange={handleChange} 
+                 value={formData.age} />
               </TableCell>
               <TableCell>{item.seatNo}</TableCell>
               <TableCell>₹{item.charge}</TableCell>
@@ -128,24 +139,32 @@ const {root,infoDiv,btnDiv}=tableStyles();
       <Divider />
       <Grid xs={12} style={{ display: "flex" }}>
         <Typography style={{ flexGrow: 1 }}>
-          3 Seat(s) selected (Max. 6 seats) Total Fare:
+          {SelectedSeat.length} Seat(s) selected (Max. 6 seats) Total Fare:
         </Typography>
         <Typography>
           {" "}
-          <b>Total:</b>₹4444
+          <b>Total:</b>₹{sumCount}
         </Typography>
       </Grid>
       </Grid>
     <Grid  className={infoDiv} >
-     <InfoBox/>
+     <InfoBox 
+     mobileValue={formData.mobile}
+     IdNoValue={formData.IdNo}
+     emergencyValue={formData.emergency}
+     IdProofOn={(data) => setIdProof(data.value)}
+     inputOnChange={handleChange}
+     
+     />
      </Grid>
      <div className={btnDiv} >
        <CustomButton 
-       buttonText="PROCEED TO PAYMENT"
+        buttonText={loader ? "Loading..." :"PROCEED TO PAYMENT"}
         className={buttonStyle}
+        onClick={handleFormSubmit}
         />
      </div>
-    </form>
+  
     </>
   );
 }

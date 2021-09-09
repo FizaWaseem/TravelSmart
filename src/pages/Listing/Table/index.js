@@ -1,6 +1,5 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import {
-  Paper,
   makeStyles,
   TableBody,
   TableRow,
@@ -14,22 +13,10 @@ import { blue, red } from "@material-ui/core/colors";
 import { Grid } from "@material-ui/core";
 import { FaBusAlt } from "react-icons/fa";
 import useTable from "./useTable";
-import { Search } from "@material-ui/icons";
-import CustomButton from "../customButton/CustomButton";
+import CustomButton from "../../../component/customButton/CustomButton";
 import { withStyles } from "@material-ui/core/styles";
-import DialogBox from "../popup/DialogBox";
-import ListingStyles from "../../pages/Listing/styles";
-import BookingSeat from "../bookingTable/bookSeat";
-import SeatSelction from "../bookingTable/seatSelction";
-const useStyles = makeStyles((theme) => ({
-  pageContent: {
-    margin: theme.spacing(5),
-    padding: theme.spacing(3),
-  },
-  searchInput: {
-    width: "75%",
-  },
-}));
+import BookingSeat from "../../../section/bookingTable/bookSeat";
+import SeatSelction from "../../../section/bookingTable/seatSelction";
 
 const headCells = [
   { id: "travel", label: "Travels" },
@@ -108,22 +95,21 @@ export default function BusTable() {
       },
     },
   });
-  const btnRef = useRef();
 
   const classes = useStyles();
-  let initialTxt = "Seats";
+
   const [hover, sethover] = useState(true);
-  const [openPopup, setPopup] = useState(false);
+
   const handle = (id) => {
     sethover(true);
-    console.log("333---", hover, btnRef.current);
+    // console.log("333---", hover, btnRef.current);
   };
   const handleOut = (id) => {
     sethover(false);
     console.log("ddd---", hover, id);
   };
-  const [records, setRecords] = useState(rows);
-  const [filterFn, setFilterFn] = useState({
+  const [records] = useState(rows);
+  const [filterFn] = useState({
     fn: (items) => {
       return items;
     },
@@ -135,21 +121,9 @@ export default function BusTable() {
     TblPagination,
     recordsAfterPagingAndSorting,
     checked,
-    setChecked,
+    handleExpand,
+    detailShow,
   } = useTable(records, headCells, filterFn);
-
-  const handleSearch = (e) => {
-    let target = e.target;
-    setFilterFn({
-      fn: (items) => {
-        if (target.value == "") return items;
-        else
-          return items.filter((x) =>
-            x.travel.toLowerCase().includes(target.value)
-          );
-      },
-    });
-  };
 
   return (
     <>
@@ -157,10 +131,8 @@ export default function BusTable() {
         <TblHead />
         <TableBody>
           {recordsAfterPagingAndSorting().map((item) => (
-            <>
+            <React.Fragment key={item.id}>
               <TableRow
-                key={item.id}
-                ref={btnRef}
                 onMouseOver={() => handle(item.id)}
                 onMouseOut={() => handleOut(item.id)}
               >
@@ -254,38 +226,36 @@ export default function BusTable() {
                       color: "white",
                       fontSize: "16px",
                     }}
-                    onClick={() => setChecked(true)}
+                    onClick={() => handleExpand(item.id)}
                   />
                 </TableCell>
               </TableRow>
-              <TableRow>
-                <TableCell key={item.id} colSpan={12} style={{ padding: 0 }}>
-                  <Collapse in={checked}>
-                    <Grid
-                      style={{ backgroundColor: "#d6d6d6", padding: "1rem" }}
-                    >
-                      <div style={{ display: "flex", justifyContent: "end" }}>
-                        <CustomButton
-                          className={classes.buttonStyle}
-                          onClick={() => setChecked(false)}
-                          buttonText="x"
-                        />
-                      </div>
-                      <SeatSelction/>
-                      <BookingSeat />
-                    </Grid>
-                  </Collapse>
-                </TableCell>
-              </TableRow>
-            </>
+              {detailShow.includes(item.id) && (
+                <TableRow>
+                  <TableCell key={item.id} colSpan={12} style={{ padding: 0 }}>
+                    <Collapse in={checked}>
+                      <Grid
+                        style={{ backgroundColor: "#d6d6d6", padding: "1rem" }}
+                      >
+                        <div style={{ display: "flex", justifyContent: "end" }}>
+                          <CustomButton
+                            className={classes.buttonStyle}
+                            onClick={() => handleExpand(item.id)}
+                            buttonText="x"
+                          />
+                        </div>
+                        <SeatSelction />
+                        <BookingSeat />
+                      </Grid>
+                    </Collapse>
+                  </TableCell>
+                </TableRow>
+              )}
+            </React.Fragment>
           ))}
         </TableBody>
       </TblContainer>
       <TblPagination />
-
-      <DialogBox open={openPopup} setOpenPopup={setPopup}>
-        <BookingSeat />
-      </DialogBox>
     </>
   );
 }

@@ -7,10 +7,10 @@ const options = [
   { value: 'Bia', label: 'Bia' }
 ]
 
-const CustomSelect=({placeholder,isMulti,styles,Indicatorcomponent}) => (
+const CustomSelect=({placeholder,isMulti,styles,Indicatorcomponent,onChange,value}) => (
 
   <Select
-  styles={styles}
+    styles={styles}
     defaultValue={[options[0], options[3]]}
     isMulti={isMulti}
     name="colors"
@@ -18,6 +18,8 @@ const CustomSelect=({placeholder,isMulti,styles,Indicatorcomponent}) => (
     components={Indicatorcomponent}
     classNamePrefix={placeholder}
     placeholder={placeholder}
+    value={value}
+    onChange={onChange}
   />
 
 );
